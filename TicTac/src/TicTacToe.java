@@ -11,7 +11,7 @@ public class TicTacToe {
     public static final char DOT_X = 'X'; //крестик
     public static final char DOT_O = 'O'; //нолик
 
-    public static final boolean SILLY_MODE = true;
+    public static final boolean SILLY_MODE = false;
 
     private static Scanner scanner = new Scanner(System.in);
     private static Random random = new Random();
@@ -68,7 +68,7 @@ public class TicTacToe {
             System.out.println("Введите координаты через пробел");
             y = scanner.nextInt() - 1;
             x = scanner.nextInt() - 1;
-        } while (!isCellValid(x,y));
+        } while (!isCellValid(x,y,DOT_EMPTY));
         map[y][x] = DOT_X;
     }
 
@@ -78,20 +78,54 @@ public class TicTacToe {
             do {
                 x = random.nextInt(SIZE);
                 y = random.nextInt(SIZE);
-            } while (!isCellValid(x, y));
-            System.out.println("Компьютер выбрал ячейку " + (y + 1) + " " + (x + 1));
-            map[y][x] = DOT_O;
+            } while (!isCellValid(x, y,DOT_EMPTY));
         }
+        else {
+            int[][] arr = new int[SIZE][SIZE];
+            //заполняем массив весов ячеек
+            for (int i = 0; i < SIZE; i++) {
+                for (int j = 0; j < SIZE; j++) {
+                    arr[i][j] = 0;
+                }
+            }
+            // проверяем ячейки вокруг на существование и наличие в ней символа компьютера
+            for (int i = 0; i < SIZE; i++){
+                for (int j = 0; j < SIZE; j++) {
+                    for (int m = i-1; m <= i+1; m++) {
+                        for (int n = j - 1; n <= j + 1; n++) {
+                            if (isCellValid(n, m, DOT_O) && isCellValid(j, i, DOT_EMPTY)) {
+                               arr[i][j] += 1;
+                            }
+                        }
+                    }
+                }
+            }
+            //найдем ячейку с максимальным весом
+            int max = 0;
+            for (int i = 0; i < SIZE; i++) {
+                for (int j = 0; j < SIZE; j++) {
+                    if (arr[i][j] >= max && isCellValid(j,i,DOT_EMPTY)) {
+                        max = arr[i][j];
+                        x = j;
+                        y = i;
+                    }
+                }
+            }
+        }
+        System.out.println("Компьютер выбрал ячейку " + (y + 1) + " " + (x + 1));
+        map[y][x] = DOT_O;
     }
 
-    public static boolean isCellValid(int x, int y) {
+    public static boolean isCellValid(int x, int y, char DOT) {
         boolean result = true;
 
-        if(x < 0 || x >= SIZE || y < 0 || y >= SIZE){
+        if(y < 0 || y >= SIZE || x < 0 || x >= SIZE){
             result = false;
         }
-        if(map[y][x] != DOT_EMPTY){
-            result = false;
+        else{
+            if(map[y][x] != DOT){
+                result = false;
+            }
         }
         return result;
     }
