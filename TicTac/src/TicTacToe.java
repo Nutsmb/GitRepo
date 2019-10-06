@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class TicTacToe {
 
     private static char[][] map; //матрица игры
-    private static int SIZE = 3; //размерность поля
+    private static final int SIZE = 3; //размерность поля
 
     public static final char DOT_EMPTY = '*'; //символ пустой ячейки
     public static final char DOT_X = 'X'; //крестик
@@ -151,7 +151,11 @@ public class TicTacToe {
             for (int j = 0; j < SIZE; j++){
                 if(map[i][j] == DOT_EMPTY){
                     result = false;
+                    break;
                 }
+            }
+            if(!result){
+                break;
             }
         }
         return result;
