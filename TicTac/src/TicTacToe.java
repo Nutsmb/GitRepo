@@ -164,19 +164,12 @@ public class TicTacToe {
     public static boolean checkWin(char playerSymbol) {
         boolean result = false;
 
-        /*if((map [0][0] == playerSymbol && map [0][1] == playerSymbol && map [0][2] == playerSymbol) ||
-           (map [1][0] == playerSymbol && map [1][1] == playerSymbol && map [1][2] == playerSymbol) ||
-           (map [2][0] == playerSymbol && map [2][1] == playerSymbol && map [2][2] == playerSymbol) ||
-           (map [0][0] == playerSymbol && map [1][0] == playerSymbol && map [2][0] == playerSymbol) ||
-           (map [0][1] == playerSymbol && map [1][1] == playerSymbol && map [2][1] == playerSymbol) ||
-           (map [0][2] == playerSymbol && map [1][2] == playerSymbol && map [2][2] == playerSymbol) ||
-           (map [0][0] == playerSymbol && map [1][1] == playerSymbol && map [2][2] == playerSymbol) ||
-           (map [0][2] == playerSymbol && map [1][1] == playerSymbol && map [2][0] == playerSymbol)){
+        if(checkWinDiagonals(playerSymbol) || checkWinLines(playerSymbol)){
             result = true;
-        }*/
-
+        }
         return result;
     }
+
 
     public static boolean checkWinDiagonals(char playerSymbol) {
         boolean MainDiagonal = true;
@@ -189,6 +182,28 @@ public class TicTacToe {
         }
         if(MainDiagonal || SecondaryDiagonal){
             result = true;
+        }
+        return result;
+    }
+
+    public static boolean checkWinLines(char playerSymbol) {
+        boolean result = false;
+
+        for(int col = 0; col < SIZE; col++){
+            boolean columns = true;
+            boolean rows = true;
+
+            for(int row = 0; row < SIZE; row++){
+                rows &= (map[row][col] == playerSymbol);
+                columns &= (map[col][row] == playerSymbol);
+            }
+            if(columns || rows){
+                result = true;
+                break;
+            }
+            if(result){
+                break;
+            }
         }
         return result;
     }
