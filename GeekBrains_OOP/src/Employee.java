@@ -1,12 +1,15 @@
 public class Employee {
     public Object getPersonInfo;
-    
+
     String FIO;
     String position;
     String email;
     long tel;
     int salary;
     int age;
+
+    public Employee(String FIO, String position, String email, long tel, int salary, int age) {
+    }
 
     public static void main(String[] args) {
 
