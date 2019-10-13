@@ -1,19 +1,10 @@
-public class Animal {
+public abstract class Animal {
 
     public Animal(){
 
     }
 
-    public void run(int lenght){
-
-    }
-
-    public void swim(int length){
-
-    }
-
-    public void jump(int height){
-
-    }
-
+    public abstract boolean run(float length);
+    public abstract boolean swim(float length);
+    public abstract boolean jump(float height);
 }
