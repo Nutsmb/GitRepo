@@ -6,7 +6,16 @@ public class Cat extends Animal{
     boolean hungry;
 
     public static void main(String[] args) {
-        Animal cat1 = new Cat("Matroskin",2, 200, 10);
+        Meal wiskas = new Meal(9);
+        Animal[] Cats = new Animal[5];
+        Cats[0] = new Cat("Matroskin",2, 200, 2);
+        Cats[1] = new Cat("Pushok",2, 200, 4);
+        Cats[2] = new Cat("Julka",2, 200, 1);
+        Cats[3] = new Cat("Belyashik",2, 200, 3);
+        Cats[4] = new Cat("Shavuha",2, 200, 6);
+        for(int i =0; i < Cats.length; i++){
+            Cats[i].eat(wiskas);
+        }
     }
 
     public Cat(String _name, float _jump, float _run, int _appetite){
@@ -40,13 +49,13 @@ public class Cat extends Animal{
         return result;
     }
 
-    public void eat(int cupOfMeal){
-        if(APPETITE > cupOfMeal){
+    public void eat(Meal cupOfMeal){
+        if(APPETITE > cupOfMeal.getQuantity()){
             hungry = true;
             System.out.println(this.name+"'у мало еды в этой миске");
         }
         else {
-            cupOfMeal = cupOfMeal - APPETITE;
+            cupOfMeal.quantity = cupOfMeal.quantity - APPETITE;
             hungry = false;
             System.out.println(this.name+" сыт(а)");
         }
