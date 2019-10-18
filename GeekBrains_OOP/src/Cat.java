@@ -7,9 +7,6 @@ public class Cat extends Animal{
 
     public static void main(String[] args) {
         Animal cat1 = new Cat("Matroskin",2, 200, 10);
-        System.out.println(cat1.jump(1));
-        System.out.println(cat1.run(200));
-        System.out.println(cat1.swim(2));
     }
 
     public Cat(String _name, float _jump, float _run, int _appetite){
@@ -51,7 +48,7 @@ public class Cat extends Animal{
         else {
             cupOfMeal = cupOfMeal - APPETITE;
             hungry = false;
+            System.out.println(this.name+" сыт(а)");
         }
-
     }
 }

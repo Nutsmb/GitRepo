@@ -42,4 +42,7 @@ public class Dog extends Animal{
         }
         return result;
     }
+
+    @Override
+    public void eat(int cupOfMeal){    }
 }
